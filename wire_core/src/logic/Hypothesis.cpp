@@ -82,7 +82,12 @@ AssignmentMatrix* Hypothesis::getAssignmentMatrix() const {
 /* ****************************************************************************** */
 /* *                                 SETTERS                                    * */
 /* ****************************************************************************** */
-
+// necessary to declare the static member variable also in the .cpp file
+// https://stackoverflow.com/questions/9110487/undefined-reference-to-a-static-member
+double Hypothesis::die_age_;
+void Hypothesis::set_die_age(const double *die_age){
+    die_age_ = *die_age;
+}
 
 void Hypothesis::setAssignments(AssignmentSet* assignments) {
     if (assignment_set_) {
@@ -281,7 +286,7 @@ void Hypothesis::removeOldObjects() {
         SemanticObject* obj = *it_obj;
         double time_diff = ros::Time::now().toSec() - obj->getLastUpdateTime();
 
-        if(time_diff > 2){
+        if(time_diff > die_age_){
             obj->removeFromHypothesis(this);
 
             if (obj->getNumParentHypotheses() == 0) {

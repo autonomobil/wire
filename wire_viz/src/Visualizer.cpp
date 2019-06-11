@@ -73,26 +73,30 @@ bool Visualizer::createMarkers(const std_msgs::Header& header, long ID,
 				if (gauss->dimensions() == 2) {
 					ev_pose.setOrigin(tf::Point(mean(0), mean(1), 0));
 					pos_found = true;
-				} else if (gauss->dimensions() == 3) {
+				} else{
 					pos_found = true;
 					ev_pose.setOrigin(tf::Point(mean(0), mean(1), mean(2)));
-				} else {
-					ROS_WARN("World evidence: position attribute has %d dimensions, Visualizer cannot deal with this.",
-							gauss->dimensions());
+
+					if(gauss->dimensions() == 6){
+					std::cout << "vx:"<< mean(3) << "  vy:"<< mean(4) << "  vz:"<< mean(5) << std::endl;
+					}
+				// } else {
+				// 	ROS_WARN("World evidence: position attribute has %d dimensions, Visualizer cannot deal with this.",
+				// 			gauss->dimensions());
 				}
 			}
 		}
 		// Orientation
 		else if (it_prop->attribute == "orientation") {
-			if (pdf->dimensions() == 4) {
+			// if (pdf->dimensions() == 4) {
 				const pbl::Gaussian* gauss = getBestGaussian(*pdf);
 				if (gauss) {
 					const pbl::Vector& mean = gauss->getMean();
 					ev_pose.setRotation(tf::Quaternion(mean(0), mean(1), mean(2), mean(3)));
 				}
-			} else {
-				ROS_WARN("Orientation attribute has %d dimensions, must be 4 (X Y Z W).", pdf->dimensions());
-			}
+			// } else {
+			// 	ROS_WARN("Orientation attribute has %d dimensions, must be 4 (X Y Z W).", pdf->dimensions());
+			// }
 		}
 		// Class label
 		else if (it_prop->attribute == "class_label") {

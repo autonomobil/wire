@@ -153,6 +153,8 @@ public:
 
     void clearInactive();
 
+    void set_die_age(const double *die_age);
+
     void removeOldObjects();
     
     void removeAllOldObjects();
@@ -183,6 +185,7 @@ protected:
 
     bool is_active_leaf_;
 
+    static double die_age_;
 };
 
 }

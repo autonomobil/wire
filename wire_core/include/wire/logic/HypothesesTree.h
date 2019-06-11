@@ -107,6 +107,9 @@ public:
 
     void showStatistics();
 
+    /* REMOVERS */
+    void removeAllOldObjects(const double *die_age);
+
 protected:
 
     Hypothesis* root_;
@@ -137,6 +140,8 @@ protected:
 
     // Prune the tree
     void pruneTree(const Time& timestamp);
+
+    
 
 };
 

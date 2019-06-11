@@ -95,6 +95,8 @@ protected:
 
     double min_prob_ratio_;
 
+    double die_age_;
+
     ros::Time last_update_;
 
     bool initialize();

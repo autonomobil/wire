@@ -49,6 +49,7 @@ bool WorldModelROS::initialize() {
     n.getParam("output_frame", output_frame_id_);
     n.getParam("max_num_hypotheses", max_num_hyps_);
     n.getParam("min_probability_ratio", min_prob_ratio_);
+    n.getParam("die_age", die_age_);
 
     string object_models_filename = "";
     n.getParam("knowledge_filename", object_models_filename);
@@ -233,6 +234,8 @@ void WorldModelROS::processEvidence(const ros::Duration max_duration) {
 
         evidence_buffer_.pop_back();
     }
+
+    world_model_->removeAllOldObjects(&die_age_);
 }
 
 void WorldModelROS::processEvidence(const wire_msgs::WorldEvidence& world_evidence_msg) {
