@@ -41,6 +41,8 @@ public:
 
     const pbl::PDF& getValue() const;
 
+    const pbl::PDF& getGaussianState() const;
+
     virtual double getLikelihood(const PropertySet& P) const;
 
     const std::map<Attribute, Property*>& getPropertyMap() const;

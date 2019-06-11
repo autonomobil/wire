@@ -144,6 +144,15 @@ const pbl::PDF& PositionFilter::getValue() const {
     std::cout << "SOMETHINGS WRONG" << std::endl;
 }
 
+const pbl::PDF& PositionFilter::getGaussianState() const {
+    if (kalman_filter_) {
+        return kalman_filter_->getGaussianState();
+    } else if (fixed_pdf_) {
+        return *fixed_pdf_;
+    }
+    std::cout << "SOMETHINGS WRONG" << std::endl;
+}
+
 bool PositionFilter::setParameter(const std::string& param, bool b) {
     return false;
 }

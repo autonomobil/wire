@@ -102,6 +102,9 @@ public:
      */
 	const pbl::Gaussian& getGaussian() const;
 
+    // get complete state G_, not just G_small_
+    const pbl::Gaussian &getGaussianState() const;
+
     /**
      * @brief Returns the Kalman state (mean of the estimated Gaussian)
      * @return The Kalman state

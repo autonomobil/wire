@@ -66,6 +66,8 @@ public:
 
     const pbl::PDF& getValue() const;
 
+    const pbl::PDF& getGaussianState() const;
+
     //void setObjectID(const ObjectID& id);
 
     const ObjectID& getObjectID() const;

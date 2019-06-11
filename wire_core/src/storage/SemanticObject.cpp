@@ -78,6 +78,7 @@ void SemanticObject::update(const Evidence& ev) {
 
     propagate(ev.getTimestamp());
 
+    LastUpdateTime_ = ev.getTimestamp();
     // first update class property
 
     Attribute class_att = AttributeConv::attribute("class_label");
@@ -139,6 +140,10 @@ void SemanticObject::update(const Evidence& ev) {
 
 SemanticObject* SemanticObject::clone() const {
     return new SemanticObject(*this);
+}
+
+double SemanticObject::getLastUpdateTime(){
+    return LastUpdateTime_;
 }
 
 const ClassModel& SemanticObject::getExpectedObjectModel() const {

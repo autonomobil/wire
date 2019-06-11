@@ -49,6 +49,8 @@ public:
 
     const pbl::PDF& getValue() const;
 
+    const pbl::PDF& getGaussianState() const;
+
 protected:
 
     pbl::PDF* pdf_;

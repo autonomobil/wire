@@ -134,6 +134,11 @@ const pbl::Vector& KalmanFilter::getState() const {
 	return G_.getMean();
 }
 
+const pbl::Gaussian &KalmanFilter::getGaussianState() const
+{
+	return G_;
+}
+
 const pbl::Matrix& KalmanFilter::getStateCovariance() const {
 	return G_.getCovariance();
 }

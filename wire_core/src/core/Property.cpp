@@ -49,6 +49,10 @@ const pbl::PDF& Property::getValue() const {
     return estimator_->getValue();
 }
 
+const pbl::PDF& Property::getGaussianState() const {
+    return estimator_->getGaussianState();
+}
+
 void Property::update(const pbl::PDF& z, const Time& time) {
     if (time < time_) return;
     estimator_->update(z, time);

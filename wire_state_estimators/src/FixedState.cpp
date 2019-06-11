@@ -67,5 +67,10 @@ const pbl::PDF& FixedState::getValue() const {
 	return *pdf_;
 }
 
+const pbl::PDF& FixedState::getGaussianState() const {
+	return *pdf_;
+}
+
+
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS( FixedState, mhf::IStateEstimator )

@@ -38,7 +38,7 @@ public:
 
     SemanticObject* clone() const;
 
-    double getLastUpdateTime() const;
+    double getLastUpdateTime();
 
     double getTimestamp() const;
 
@@ -57,6 +57,8 @@ public:
     unsigned int getNumParentHypotheses() const;
 
 protected:
+
+    double LastUpdateTime_;
 
     ObjectID ID_;
 

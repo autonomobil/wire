@@ -40,4 +40,8 @@ const pbl::PDF& FixedState::getValue() const {
     return *pdf_;
 }
 
+const pbl::PDF& FixedState::getGaussianState() const {
+    return *pdf_;
+}
+
 }

@@ -113,8 +113,10 @@ void WorldModelROS::start() {
     ros::spinOnce();
 }
 
-bool WorldModelROS::objectToMsg(const SemanticObject& obj, wire_msgs::ObjectState& msg) const {
+bool WorldModelROS::objectToMsg(const SemanticObject& obj, wire_msgs::ObjectState& msg, double time_diff) const {
     msg.ID = obj.getID();
+
+    msg.probability = std::max(1.0 - time_diff*0.5, 0.0);
 
     const map<Attribute, Property*>& properties = obj.getPropertyMap();
 
@@ -123,7 +125,7 @@ bool WorldModelROS::objectToMsg(const SemanticObject& obj, wire_msgs::ObjectStat
 
         wire_msgs::Property prop_msg;
         prop_msg.attribute = AttributeConv::attribute_str(it_prop->first);
-        pbl::PDFtoMsg(prop->getValue(), prop_msg.pdf);
+        pbl::PDFtoMsg(prop->getGaussianState(), prop_msg.pdf);
         msg.properties.push_back(prop_msg);
     }
 
@@ -138,11 +140,14 @@ bool WorldModelROS::hypothesisToMsg(const Hypothesis& hyp, wire_msgs::WorldState
 
     for(list<SemanticObject*>::const_iterator it = hyp.getObjects().begin(); it != hyp.getObjects().end(); ++it) {
 
+        SemanticObject* obj = *it;
+        double time_diff = ros::Time::now().toSec() - obj->getLastUpdateTime();
+
         SemanticObject* obj_clone = (*it)->clone();
         obj_clone->propagate(time.toSec());
 
         wire_msgs::ObjectState obj_msg;
-        if (objectToMsg(*obj_clone, obj_msg)) {
+        if (objectToMsg(*obj_clone, obj_msg, time_diff)) {
             msg.objects.push_back(obj_msg);
         }
 

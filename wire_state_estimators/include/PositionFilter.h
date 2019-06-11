@@ -85,6 +85,9 @@ public:
      */
     const pbl::PDF& getValue() const;
 
+    // return the complete state matrix, not just measurement dimensions
+    const pbl::PDF& getGaussianState() const;
+
     void setValue(const pbl::PDF& pdf);
 
     /**
@@ -103,9 +106,11 @@ public:
      */
     bool setParameter(const std::string& param, double v);
 
+    mhf::Time t_last_update_;
+
 protected:
 
-    mhf::Time t_last_update_;
+    
 
     mhf::Time t_last_propagation_;
 

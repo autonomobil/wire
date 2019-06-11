@@ -60,6 +60,7 @@
 #ifndef HYPOTHESIS_H_
 #define HYPOTHESIS_H_
 
+#include <ros/ros.h>
 #include <string>
 #include <list>
 
@@ -151,6 +152,10 @@ public:
         /* TREE CLEAR / DELETE METHODS */
 
     void clearInactive();
+
+    void removeOldObjects();
+    
+    void removeAllOldObjects();
 
     void deleteChildren();
 

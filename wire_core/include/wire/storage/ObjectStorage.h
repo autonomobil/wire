@@ -21,6 +21,8 @@ public:
 
     void removeObject(SemanticObject& obj);
 
+    void addFreeID(SemanticObject& obj);
+
     long getUniqueID();
 
     void match(const Evidence& ev);
@@ -31,8 +33,9 @@ protected:
 
     static ObjectStorage* instance_;
 
-
     long ID_;
+
+    std::list<long> possible_IDs_;
 
     std::list<SemanticObject*> objects_;
 

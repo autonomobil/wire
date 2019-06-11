@@ -35,8 +35,20 @@ void ObjectStorage::removeObject(SemanticObject& obj) {
     objects_.erase(obj.it_obj_storage_);
 }
 
+void ObjectStorage::addFreeID(SemanticObject& obj) {
+    possible_IDs_.push_back(obj.getID());
+}
+
 long ObjectStorage::getUniqueID() {
-    return ID_++;
+
+    if (possible_IDs_.size()>0){
+        long reused_ID = possible_IDs_.front();
+        possible_IDs_.pop_front();
+        return reused_ID;
+    }else{
+        ID_++;
+        return ID_;
+    }
 }
 
 void ObjectStorage::match(const Evidence& ev) {

@@ -273,6 +273,41 @@ void Hypothesis::clearInactive() {
     }
 }
 
+// remove old objects
+void Hypothesis::removeOldObjects() {
+
+    for (list<SemanticObject*>::iterator it_obj = objects_.begin(); it_obj != objects_.end(); ++it_obj) {
+
+        SemanticObject* obj = *it_obj;
+        double time_diff = ros::Time::now().toSec() - obj->getLastUpdateTime();
+
+        if(time_diff > 2){
+            obj->removeFromHypothesis(this);
+
+            if (obj->getNumParentHypotheses() == 0) {
+                
+                ObjectStorage::getInstance().addFreeID(*obj);
+                ObjectStorage::getInstance().removeObject(*obj);
+                
+                delete obj;
+            }
+            objects_.erase(it_obj);
+            it_obj--;
+        }    
+    }
+}
+
+void Hypothesis::removeAllOldObjects() {
+
+    removeOldObjects();
+
+    for (list<Hypothesis*>::const_iterator it = children_.begin(); it != children_.end(); ++it) {
+        (*it)->removeAllOldObjects();
+    }
+
+}
+
+
 
 void Hypothesis::deleteChildren() {
     // delete all child hypotheses

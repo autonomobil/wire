@@ -118,6 +118,10 @@ const pbl::PDF& PropertySet::getValue() const {
     assert(false);
 }
 
+const pbl::PDF& PropertySet::getGaussianState() const {
+    assert(false);
+}
+
 double PropertySet::getLikelihood(const PropertySet& P) const {
     double likelihood = 1;
 

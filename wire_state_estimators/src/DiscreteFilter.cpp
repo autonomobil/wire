@@ -71,5 +71,9 @@ const pbl::PDF& DiscreteFilter::getValue() const {
 	return pmf_;
 }
 
+const pbl::PDF& DiscreteFilter::getGaussianState() const {
+	return pmf_;
+}
+
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS( DiscreteFilter, mhf::IStateEstimator )

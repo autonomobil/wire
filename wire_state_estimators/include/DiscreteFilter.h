@@ -85,6 +85,8 @@ public:
      */
 	virtual const pbl::PDF& getValue() const;
 
+    virtual const pbl::PDF& getGaussianState() const;
+
 protected:
 
 	pbl::PMF pmf_;

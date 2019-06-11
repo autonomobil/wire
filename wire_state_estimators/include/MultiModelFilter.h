@@ -80,6 +80,8 @@ public:
      */
     const pbl::PDF& getValue() const;
 
+    const pbl::PDF& getGaussianState() const;
+
     void setValue(const pbl::PDF& pdf);
 
     /**

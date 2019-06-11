@@ -101,7 +101,7 @@ protected:
 
     void initializeMHF();
 
-    bool objectToMsg(const SemanticObject& obj, wire_msgs::ObjectState& msg) const;
+    bool objectToMsg(const SemanticObject& obj, wire_msgs::ObjectState& msg, double time_diff) const;
 
     bool hypothesisToMsg(const mhf::Hypothesis& hyp, wire_msgs::WorldState& msg) const;
 
